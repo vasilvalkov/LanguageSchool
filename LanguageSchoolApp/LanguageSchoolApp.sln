@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageSchoolApp", "LanguageSchoolApp\LanguageSchoolApp.csproj", "{A2A85E74-2EC1-41A5-893D-3CD23BE25692}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageSchoolApp.UnitTests", "LanguageSchoolApp.UnitTests\LanguageSchoolApp.UnitTests.csproj", "{5F8F0234-5E46-4467-B907-CBF5C51E92F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2A85E74-2EC1-41A5-893D-3CD23BE25692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A85E74-2EC1-41A5-893D-3CD23BE25692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A85E74-2EC1-41A5-893D-3CD23BE25692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A85E74-2EC1-41A5-893D-3CD23BE25692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F8F0234-5E46-4467-B907-CBF5C51E92F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F8F0234-5E46-4467-B907-CBF5C51E92F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F8F0234-5E46-4467-B907-CBF5C51E92F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F8F0234-5E46-4467-B907-CBF5C51E92F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
