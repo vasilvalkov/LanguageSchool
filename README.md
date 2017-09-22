@@ -3,7 +3,7 @@
 ## Language School
 
 
-[![Build Status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/mro72syj8xyll3qj/branch/master?svg=true)](https://ci.appveyor.com/project/vasilvalkov/languageschool/branch/master)
 
 
 |№  |   Name       |              GitHub Аccount                   |                Telerik Academy Аccount                   |
