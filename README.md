@@ -5,6 +5,9 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/mro72syj8xyll3qj/branch/master?svg=true)](https://ci.appveyor.com/project/vasilvalkov/languageschool/branch/master)
 
+[![codecov](https://codecov.io/gh/vasilvalkov/LanguageSchool/branch/master/graph/badge.svg)](https://codecov.io/gh/vasilvalkov/LanguageSchool)
+
+
 
 |№  |   Name       |              GitHub Аccount                   |                Telerik Academy Аccount                   |
 |:-:|:------------:|:---------------------------------------------:|:--------------------------------------------------------:|
