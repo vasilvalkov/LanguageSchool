@@ -1,1 +1,1 @@
-nunit3-console LanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll  --filter:"+[*.UnitTests]*" --register:user --result=myresults.xml;format=AppVeyor
+nunit3-console LanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll /xml  --result=myresults.xml;format=AppVeyor
