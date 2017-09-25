@@ -1,1 +1,1 @@
-nunit3-console-x86 /noshadow LanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll
+nunit-console-x86 /noshadow LanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll
