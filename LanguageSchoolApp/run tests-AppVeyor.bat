@@ -1,1 +1,1 @@
-nunit-console-x86 /noshadow LanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll
+nunits-consoleLanguageSchoolApp\LanguageSchoolApp.UnitTests\bin\Debug\LanguageSchoolApp.UnitTests.dll /noshadow --result=testsresults.xml;format=AppVeyor
