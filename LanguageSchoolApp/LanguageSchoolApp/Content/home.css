@@ -1,13 +1,25 @@
 ﻿.parallax {
     /* The image used */
     background-image: url("images/happy-students.jpg");
-
     /* Set a specific height */
     height: 700px;
-
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.primary-color {
+    color: #008cba;
+}
+
+.parallax h1 {
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 4px 8px;
+}
+
+.opp h1 {
+    background: rgba(255, 255, 255, 0.75);
 }
