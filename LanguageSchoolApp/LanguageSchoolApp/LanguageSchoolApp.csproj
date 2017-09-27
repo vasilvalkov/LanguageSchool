@@ -222,7 +222,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -306,6 +305,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageSchoolApp.Data.Model\LanguageSchoolApp.Data.Model.csproj">
+      <Project>{0bdfe25a-8b65-4027-8961-f930f35556f7}</Project>
+      <Name>LanguageSchoolApp.Data.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LanguageSchoolApp.Data\LanguageSchoolApp.Data.csproj">
+      <Project>{1031dde7-d8ef-4431-a922-350609fdf15b}</Project>
+      <Name>LanguageSchoolApp.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
