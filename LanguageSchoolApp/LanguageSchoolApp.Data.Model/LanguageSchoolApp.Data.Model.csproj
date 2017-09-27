@@ -57,6 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\DataModel.cs" />
+    <Compile Include="Contracts\IAuditable.cs" />
+    <Compile Include="Contracts\IDeletable.cs" />
+    <Compile Include="Course.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
