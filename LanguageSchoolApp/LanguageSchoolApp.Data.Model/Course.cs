@@ -8,6 +8,13 @@ namespace LanguageSchoolApp.Data.Model
 {
     public class Course : DataModel
     {
+        private ICollection<User> students;
+
+        public Course()
+        {
+            this.students = new HashSet<User>();
+        }
+
         [Index]
         [Required]
         [StringLength(80)]
@@ -20,5 +27,18 @@ namespace LanguageSchoolApp.Data.Model
         public DateTime StartsOn { get; set; }
 
         public DateTime EndsOn { get; set; }
+
+        public ICollection<User> Students
+        {
+            get
+            {
+                return this.students;
+            }
+
+            set
+            {
+                this.students = value;
+            }
+        }
     }
 }

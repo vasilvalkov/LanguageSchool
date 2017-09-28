@@ -18,6 +18,7 @@ namespace LanguageSchoolApp.Data
         }
 
         public IDbSet<Course> Courses { get; set; }
+        public IDbSet<CourseResult> CourseResults { get; set; }
 
         public override int SaveChanges()
         {
