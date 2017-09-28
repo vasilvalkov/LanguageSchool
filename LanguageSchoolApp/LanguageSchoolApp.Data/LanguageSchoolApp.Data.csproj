@@ -69,6 +69,14 @@
     <Compile Include="Migrations\201709281725102_Course description has type ntext.Designer.cs">
       <DependentUpon>201709281725102_Course description has type ntext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709281931250_Add CourseResult.cs" />
+    <Compile Include="Migrations\201709281931250_Add CourseResult.Designer.cs">
+      <DependentUpon>201709281931250_Add CourseResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282037367_CourseResult CoursePoints have range 0-100.cs" />
+    <Compile Include="Migrations\201709282037367_CourseResult CoursePoints have range 0-100.Designer.cs">
+      <DependentUpon>201709282037367_CourseResult CoursePoints have range 0-100.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MsSqlDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709281725102_Course description has type ntext.resx">
       <DependentUpon>201709281725102_Course description has type ntext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281931250_Add CourseResult.resx">
+      <DependentUpon>201709281931250_Add CourseResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282037367_CourseResult CoursePoints have range 0-100.resx">
+      <DependentUpon>201709282037367_CourseResult CoursePoints have range 0-100.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
