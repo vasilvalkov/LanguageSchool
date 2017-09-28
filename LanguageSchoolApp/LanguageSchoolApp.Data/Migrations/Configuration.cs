@@ -1,11 +1,15 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using LanguageSchoolApp.Data.Model;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+
 namespace LanguageSchoolApp.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<LanguageSchoolApp.Data.MsSqlDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<MsSqlDbContext>
     {
         public Configuration()
         {
@@ -13,20 +17,25 @@ namespace LanguageSchoolApp.Data.Migrations
             this.AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(LanguageSchoolApp.Data.MsSqlDbContext context)
+        protected override void Seed(MsSqlDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            const string AdministratorUserName = "admin@linguana.com";
+            const string AdministratorPassword = "aaSS11!!";
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            if (!context.Roles.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole { Name = "Admin" };
+                roleManager.Create(role);
+
+                var userStore = new UserStore<User>(context);
+                var userManager = new UserManager<User>(userStore);
+                var user = new User { UserName = AdministratorUserName, Email = AdministratorUserName, EmailConfirmed = true };
+                userManager.Create(user, AdministratorPassword);
+
+                userManager.AddToRole(user.Id, "Admin");
+            }
         }
     }
 }
