@@ -7,13 +7,13 @@ namespace LanguageSchoolApp.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class ValidationsforCourseproperties : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ValidationsforCourseproperties));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709281541529_Initial"; }
+            get { return "201709281718343_Validations for Course properties"; }
         }
         
         string IMigrationMetadata.Source

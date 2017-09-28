@@ -57,6 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201709281659017_Initial.cs" />
+    <Compile Include="Migrations\201709281659017_Initial.Designer.cs">
+      <DependentUpon>201709281659017_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709281718343_Validations for Course properties.cs" />
+    <Compile Include="Migrations\201709281718343_Validations for Course properties.Designer.cs">
+      <DependentUpon>201709281718343_Validations for Course properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709281725102_Course description has type ntext.cs" />
+    <Compile Include="Migrations\201709281725102_Course description has type ntext.Designer.cs">
+      <DependentUpon>201709281725102_Course description has type ntext.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MsSqlDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +84,17 @@
       <Project>{0bdfe25a-8b65-4027-8961-f930f35556f7}</Project>
       <Name>LanguageSchoolApp.Data.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709281659017_Initial.resx">
+      <DependentUpon>201709281659017_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281718343_Validations for Course properties.resx">
+      <DependentUpon>201709281718343_Validations for Course properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281725102_Course description has type ntext.resx">
+      <DependentUpon>201709281725102_Course description has type ntext.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

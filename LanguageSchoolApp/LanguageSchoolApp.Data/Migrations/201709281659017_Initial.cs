@@ -12,6 +12,10 @@ namespace LanguageSchoolApp.Data.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
+                        Title = c.String(),
+                        Description = c.String(),
+                        StartsOn = c.DateTime(nullable: false),
+                        EndsOn = c.DateTime(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                         DeletedOn = c.DateTime(),
                         CreatedOn = c.DateTime(),
