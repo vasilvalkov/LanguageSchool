@@ -3,7 +3,7 @@ using LanguageSchoolApp.Data.Model.Contracts;
 
 namespace LanguageSchoolApp.Data.Repositories
 {
-    public interface IEfRepostory<T>
+    public interface IEfRepository<T>
         where T : class, IDeletable
     {
         IQueryable<T> All { get; }
