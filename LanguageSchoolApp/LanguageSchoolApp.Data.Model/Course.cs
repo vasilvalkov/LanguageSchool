@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanguageSchoolApp.Data.Model.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LanguageSchoolApp.Data.Model
 {
-    public class Course
+    public class Course : DataModel
     {
     }
 }
