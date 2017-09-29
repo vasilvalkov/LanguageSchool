@@ -6,8 +6,12 @@ namespace LanguageSchoolApp.Data.Model
     public class CourseResult : DataModel
     {
         [Required]
-        public Course Course { get; set; }
+        public virtual Course Course { get; set; }
+
         [Range(0, 100)]
         public int CoursePoints { get; set; }
+
+        [Required]
+        public virtual User Student { get; set; }
     }
 }

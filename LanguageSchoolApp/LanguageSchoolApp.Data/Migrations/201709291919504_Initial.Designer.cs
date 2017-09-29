@@ -7,13 +7,13 @@ namespace LanguageSchoolApp.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class AddCourseResult : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCourseResult));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709281931250_Add CourseResult"; }
+            get { return "201709291919504_Initial"; }
         }
         
         string IMigrationMetadata.Source

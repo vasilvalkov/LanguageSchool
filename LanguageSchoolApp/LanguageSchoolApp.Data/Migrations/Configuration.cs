@@ -7,7 +7,6 @@ using System;
 
 namespace LanguageSchoolApp.Data.Migrations
 {
-
     public sealed class Configuration : DbMigrationsConfiguration<MsSqlDbContext>
     {
         const string AdministratorUserName = "admin@linguana.com";
@@ -26,16 +25,19 @@ namespace LanguageSchoolApp.Data.Migrations
             base.Seed(context);
         }
 
-        private void SeedSampleData(MsSqlDbContext context)
+        public void SeedSampleData(MsSqlDbContext context)
         {
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
+            Random rnd = new Random();
             if (!context.Courses.Any())
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 1; i < 6; i++)
                 {
                     var date = new DateTime(2017, 7 + i, 10 + i * 2);
                     var course = new Course()
                     {
-                        Title = " Sample Course " + i,
+                        Title = "Sample Course " + i,
                         Description = "Lorem ipsum dolor sit amet, ei explicari voluptaria cum, vel epicurei theophrastus in. Mel an elit eleifend iracundia, id erat antiopam inimicus pri. Partiendo erroribus ad sed, dolor dictas vocent ne usu, per eu facer errem. Cum nostrum perfecto cu, eos ei essent feugiat eleifend. Vis et nostrum percipit.",
                         CreatedOn = DateTime.Now,
                         StartsOn = date,
@@ -45,21 +47,18 @@ namespace LanguageSchoolApp.Data.Migrations
                     course.Students.Add(context.Users.First(u => u.Email == AdministratorUserName));
 
                     context.Courses.Add(course);
-                }
 
-                if (!context.CourseResults.Any())
-                {
-                    var courseResult = new CourseResult()
+                    if (!context.CourseResults.Any())
                     {
-                        Course = context.Courses.First(c => c.Title == "Sample Course 2"),
-                        CoursePoints = 75
-                    };
+                        var courseResult = new CourseResult()
+                        {
+                            Course = course,
+                            CoursePoints = rnd.Next(0, 100),
+                            Student = context.Users.First(u => u.Email == AdministratorUserName)
+                        };
 
-                    context
-                        .Users
-                        .First(u => u.Email == AdministratorUserName)
-                        .CourseResults
-                        .Add(courseResult);
+                        context.CourseResults.Add(courseResult);
+                    }
                 }
             }
         }
