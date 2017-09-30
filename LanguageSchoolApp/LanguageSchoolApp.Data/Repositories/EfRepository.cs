@@ -16,7 +16,10 @@ namespace LanguageSchoolApp.Data.Repositories
             this.context = context;
         }
 
-        public IQueryable<T> All
+        /// <summary>
+        /// Returns all existing courses except those that have been deleted, i.e. those with flad isDeleted = true are not returned.
+        /// </summary>
+        public IQueryable<T> AllNotDeleted
         {
             get
             {
@@ -24,7 +27,10 @@ namespace LanguageSchoolApp.Data.Repositories
             }
         }
 
-        public IQueryable<T> AllAndDeleted
+        /// <summary>
+        /// Returns all existing courses together with those that have been deleted, i.e. those with flad isDeleted = true are returned as well.
+        /// </summary>
+        public IQueryable<T> All
         {
             get
             {

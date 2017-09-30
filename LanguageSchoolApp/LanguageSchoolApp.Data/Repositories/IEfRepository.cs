@@ -6,9 +6,9 @@ namespace LanguageSchoolApp.Data.Repositories
     public interface IEfRepository<T>
         where T : class, IDeletable
     {
-        IQueryable<T> All { get; }
+        IQueryable<T> AllNotDeleted { get; }
 
-        IQueryable<T> AllAndDeleted { get; }
+        IQueryable<T> All { get; }
 
         void Add(T entity);
 
