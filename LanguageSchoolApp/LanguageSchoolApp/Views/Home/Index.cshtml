@@ -1,4 +1,7 @@
-﻿@{
+﻿@using LanguageSchoolApp.Models.Home
+@model HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -24,7 +27,13 @@
 <h2 class="text-center">Upcoming courses</h2>
 <hr />
 <section class="row">
-    <div class="col-md-4">
+    @{
+        foreach (var course in Model.Courses)
+        {
+            @Html.Partial("_CourseTilePartial", course);
+        }
+    }
+    @*<div class="col-md-4">
         <h3>Cambridge certification exam </h3>
         <p>
             Trainings and mock exams for IELTS. Starts on 30.10.2017.
@@ -40,5 +49,5 @@
         <h3>Italian with Espresso</h3>
         <p>Learn Italian with the Espresso system by new methodological principles.</p>
         <p><a class="btn btn-primary" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    </div>*@
 </section>

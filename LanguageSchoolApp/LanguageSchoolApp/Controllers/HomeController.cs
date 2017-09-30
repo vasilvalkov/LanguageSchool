@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LanguageSchoolApp.Models.Home;
+using LanguageSchoolApp.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,35 @@ namespace LanguageSchoolApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICourseService courseService;
+
+        public HomeController(ICourseService courseService)
+        {
+            this.courseService = courseService;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var upcomingCourses = this.courseService
+                .GetAll()
+                .Where(x => x.StartsOn > DateTime.Now)
+                .OrderBy(x => x.StartsOn)
+                .Select(x => new CourseViewModel()
+                    {
+                        Title = x.Title,
+                        Desctiption = x.Description,
+                        StartsOn = x.StartsOn,
+                        CourseId = x.Id.ToString()
+                    })
+                .Take(3)
+                .ToList();
+
+            var viewModel = new HomeViewModel()
+            {
+                Courses = upcomingCourses
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()
