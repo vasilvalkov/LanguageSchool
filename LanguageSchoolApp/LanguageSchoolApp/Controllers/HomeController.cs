@@ -24,12 +24,12 @@ namespace LanguageSchoolApp.Controllers
                 .Where(x => x.StartsOn > DateTime.Now)
                 .OrderBy(x => x.StartsOn)
                 .Select(x => new CourseViewModel()
-                    {
-                        Title = x.Title,
-                        Desctiption = x.Description,
-                        StartsOn = x.StartsOn,
-                        CourseId = x.Id.ToString()
-                    })
+                {
+                    Title = x.Title,
+                    Desctiption = x.Description,
+                    StartsOn = x.StartsOn,
+                    CourseId = x.Id.ToString()
+                })
                 .Take(3)
                 .ToList();
 
