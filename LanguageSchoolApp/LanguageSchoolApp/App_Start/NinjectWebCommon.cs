@@ -14,6 +14,9 @@ namespace LanguageSchoolApp.App_Start
     using Data.Repositories;
     using Data;
     using System.Data.Entity;
+    using Services.Contracts;
+    using Services;
+    using Data.SaveContext;
 
     public static class NinjectWebCommon 
     {
@@ -74,6 +77,8 @@ namespace LanguageSchoolApp.App_Start
 
             kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
+            kernel.Bind(typeof(ICourseService)).To(typeof(CourseService));
+            kernel.Bind<ISaveContext>().To<SaveContext>();
         }        
     }
 }
