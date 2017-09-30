@@ -27,6 +27,8 @@ namespace LanguageSchoolApp
                       //"~/Content/bootstrap.css",
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

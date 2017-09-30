@@ -10,6 +10,15 @@
     background-size: cover;
 }
 
+.parallax .row {
+    width: 100%;
+    margin: 0;
+}
+
+.parallax .col-md-12 {
+    padding: 0;
+}
+
 .primary-color {
     color: #008cba;
 }
