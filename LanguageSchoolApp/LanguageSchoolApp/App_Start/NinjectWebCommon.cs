@@ -17,6 +17,7 @@ namespace LanguageSchoolApp.App_Start
     using Services.Contracts;
     using Services;
     using Data.SaveContext;
+    using AutoMapper;
 
     public static class NinjectWebCommon 
     {

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LanguageSchoolApp.Data.Model;
+using LanguageSchoolApp.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 
 namespace LanguageSchoolApp.Models.Home
 {
-    public class CourseViewModel
+    public class CourseViewModel : IMapFrom<Course>, IHaveCustomMappings
     {
         public string Title { get; set; }
 
@@ -14,5 +16,14 @@ namespace LanguageSchoolApp.Models.Home
         public DateTime StartsOn { get; set; }
 
         public string CourseId { get; set; }
+
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            configuration.CreateMap<Course, CourseViewModel>()
+                .ForMember(vm => vm.Title, cfg => cfg.MapFrom(course => course.Title))
+                .ForMember(vm => vm.Desctiption, cfg => cfg.MapFrom(course => course.Description))
+                .ForMember(vm => vm.StartsOn, cfg => cfg.MapFrom(course => course.StartsOn))
+                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id.ToString()));
+        }
     }
 }
