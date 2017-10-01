@@ -4,6 +4,6 @@ namespace LanguageSchoolApp.Models.Home
 {
     public class HomeViewModel
     {
-        public ICollection<CourseViewModel> Courses { get; set; }
+        public ICollection<CourseTileViewModel> Courses { get; set; }
     }
 }

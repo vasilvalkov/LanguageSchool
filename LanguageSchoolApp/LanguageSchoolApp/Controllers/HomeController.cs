@@ -1,4 +1,5 @@
-﻿using LanguageSchoolApp.Models.Home;
+﻿using LanguageSchoolApp.Models.Courses;
+using LanguageSchoolApp.Models.Home;
 using LanguageSchoolApp.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace LanguageSchoolApp.Controllers
                 .GetAll()
                 .Where(x => x.StartsOn > DateTime.Now)
                 .OrderBy(x => x.StartsOn)
-                .Select(x => new CourseViewModel()
+                .Select(x => new CourseTileViewModel()
                 {
                     Title = x.Title,
-                    Desctiption = x.Description,
+                    Description = x.Description,
                     StartsOn = x.StartsOn,
                     CourseId = x.Id.ToString()
                 })
