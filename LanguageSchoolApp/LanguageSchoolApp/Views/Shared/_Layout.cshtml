@@ -22,9 +22,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "home" && ViewContext.RouteData.Values["Action"].ToString() == "index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllCourses" ? "active" : "")">@Html.ActionLink("Courses", "AllCourses", "Courses")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "about" ? "active" : "")">@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
