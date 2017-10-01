@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using LanguageSchoolApp;
 using LanguageSchoolApp.Controllers;
 using NUnit.Framework;
+using Moq;
+using LanguageSchoolApp.Services.Contracts;
 
 namespace LanguageSchoolApp.UnitTests.Controllers
 {
@@ -16,7 +18,8 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var courseServiceStub = new Mock<ICourseService>();
+            HomeController controller = new HomeController(courseServiceStub.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +32,8 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var courseServiceStub = new Mock<ICourseService>();
+            HomeController controller = new HomeController(courseServiceStub.Object);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +46,8 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var courseServiceStub = new Mock<ICourseService>();
+            HomeController controller = new HomeController(courseServiceStub.Object);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
