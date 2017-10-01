@@ -1,0 +1,20 @@
+﻿@using LanguageSchoolApp.Models.Courses
+@model CourseViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+<h1>@Model.Title</h1>
+<hr />
+<section class="row">
+    <aside class="well well-sm pull-left col-md-2">
+        <p>Starts on: @Html.DisplayFor(x => Model.StartsOn)</p>
+        <p>Ends on: @Html.DisplayFor(x => Model.EndsOn)</p>
+        <p>Enrolled students: @Model.EnrolledStudentsCount</p>
+    </aside>
+    <div class="col-md-10">
+        <p class="lead">@Model.Description</p>
+        <a class="btn btn-primary btn-block" href="#">Enroll</a>
+    </div>
+</section>

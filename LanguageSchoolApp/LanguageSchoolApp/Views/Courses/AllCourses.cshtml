@@ -1,0 +1,15 @@
+﻿@using LanguageSchoolApp.Models.Courses
+@model CourseListViewModel
+
+@{
+    ViewBag.Title = "All courses";
+}
+
+@{
+    foreach (var course in Model.Courses)
+    {
+        <article class="row">
+            @Html.Partial("_CourseDetailedTilePartial", course)
+        </article>
+    }
+}

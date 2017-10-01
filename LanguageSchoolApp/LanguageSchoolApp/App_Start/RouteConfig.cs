@@ -16,9 +16,21 @@ namespace LanguageSchoolApp
             routes.LowercaseUrls = true;
 
             routes.MapRoute(
+                name: "AllCourses",
+                url: "Courses/AllCourses",
+                defaults: new { controller = "Courses", action = "AllCourses", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Courses",
+                url: "Courses/{id}",
+                defaults: new { controller = "Courses", action = "ById", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "home", action = "index", id = UrlParameter.Optional }
             );
         }
     }
