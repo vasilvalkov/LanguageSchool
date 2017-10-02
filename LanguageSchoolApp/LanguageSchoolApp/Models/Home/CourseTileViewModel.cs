@@ -15,7 +15,7 @@ namespace LanguageSchoolApp.Models.Home
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime StartsOn { get; set; }
         
-        public string CourseId { get; set; }
+        public Guid CourseId { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
@@ -23,7 +23,7 @@ namespace LanguageSchoolApp.Models.Home
                 .ForMember(vm => vm.Title, cfg => cfg.MapFrom(course => course.Title))
                 .ForMember(vm => vm.Description, cfg => cfg.MapFrom(course => course.Description))
                 .ForMember(vm => vm.StartsOn, cfg => cfg.MapFrom(course => course.StartsOn))
-                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id.ToString()));
+                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id));
         }
     }
 }

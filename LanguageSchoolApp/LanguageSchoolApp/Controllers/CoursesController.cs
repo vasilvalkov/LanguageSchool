@@ -1,5 +1,6 @@
 ﻿using LanguageSchoolApp.Models.Courses;
 using LanguageSchoolApp.Services.Contracts;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -27,7 +28,7 @@ namespace LanguageSchoolApp.Controllers
                     StartsOn = x.StartsOn,
                     EndsOn = x.EndsOn,
                     EnrolledStudentsCount = x.Students.Count(),
-                    CourseId = x.Id.ToString()
+                    CourseId = x.Id
                 })
                 .ToList();
 
@@ -40,11 +41,11 @@ namespace LanguageSchoolApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult ById(string id)
+        public ActionResult ById(Guid id)
         {
             var viewModel = this.courseService
                 .GetAll()
-                .Where(c => c.Id.ToString() == id)
+                .Where(c => c.Id == id)
                 .Select(x => new CourseViewModel()
                 {
                     Title = x.Title,
@@ -52,7 +53,7 @@ namespace LanguageSchoolApp.Controllers
                     StartsOn = x.StartsOn,
                     EndsOn = x.EndsOn,
                     EnrolledStudentsCount = x.Students.Count(),
-                    CourseId = x.Id.ToString()
+                    CourseId = x.Id
                 })
                 .FirstOrDefault();
 

@@ -19,7 +19,7 @@ namespace LanguageSchoolApp.Models.Courses
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime EndsOn { get; set; }
 
-        public string CourseId { get; set; }
+        public Guid CourseId { get; set; }
 
         public int EnrolledStudentsCount { get; set; }
 
@@ -31,7 +31,7 @@ namespace LanguageSchoolApp.Models.Courses
                 .ForMember(vm => vm.StartsOn, cfg => cfg.MapFrom(course => course.StartsOn))
                 .ForMember(vm => vm.EndsOn, cfg => cfg.MapFrom(course => course.EndsOn))
                 .ForMember(vm => vm.EnrolledStudentsCount, cfg => cfg.MapFrom(course => course.Students.Count))
-                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id.ToString()));
+                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id));
         }
     }
 }

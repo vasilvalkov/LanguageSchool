@@ -29,7 +29,7 @@ namespace LanguageSchoolApp.Controllers
                     Title = x.Title,
                     Description = x.Description,
                     StartsOn = x.StartsOn,
-                    CourseId = x.Id.ToString()
+                    CourseId = x.Id
                 })
                 .Take(3)
                 .ToList();
