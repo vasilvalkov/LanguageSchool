@@ -2,23 +2,20 @@
 using LanguageSchoolApp.Data.Model.Contracts;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LanguageSchoolApp.Data
 {
-    public class MsSqlDbContext : IdentityDbContext<User>
+    public class MsSqlDbContext : IdentityDbContext<User>, IMsSqlDbContext
     {
         public MsSqlDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public IDbSet<Course> Courses { get; set; }
-        public IDbSet<CourseResult> CourseResults { get; set; }
+        public virtual IDbSet<Course> Courses { get; set; }
+        public virtual IDbSet<CourseResult> CourseResults { get; set; }
 
         public override int SaveChanges()
         {

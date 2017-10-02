@@ -76,7 +76,7 @@ namespace LanguageSchoolApp.App_Start
                  .BindDefaultInterface();
             });
 
-            kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
+            kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext), typeof(IMsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind(typeof(ICourseService)).To(typeof(CourseService));
             kernel.Bind<ISaveContext>().To<SaveContext>();

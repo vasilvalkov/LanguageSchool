@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LanguageSchoolApp.Models;
 using LanguageSchoolApp.Data.Model;
+using LanguageSchoolApp.Models.Account;
 
 namespace LanguageSchoolApp.Controllers
 {
