@@ -4,6 +4,6 @@ namespace LanguageSchoolApp.Models.Courses
 {
     public class CourseListViewModel
     {
-        public ICollection<CourseViewModel> Courses { get; set; }
+        public virtual ICollection<CourseViewModel> Courses { get; set; }
     }
 }
