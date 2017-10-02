@@ -1,4 +1,6 @@
-﻿using LanguageSchoolApp.Models.Courses;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using LanguageSchoolApp.Models.Courses;
 using LanguageSchoolApp.Models.Home;
 using LanguageSchoolApp.Services.Contracts;
 using System;
@@ -12,26 +14,31 @@ namespace LanguageSchoolApp.Controllers
     public class HomeController : Controller
     {
         private readonly ICourseService courseService;
+        private readonly IMapper mapper;
 
-        public HomeController(ICourseService courseService)
+        public HomeController(ICourseService courseService, IMapper mapper)
         {
             this.courseService = courseService;
+            this.mapper = mapper;
         }
 
         public ActionResult Index()
         {
+            int upcomingCoursesCount = 3;
+
             var upcomingCourses = this.courseService
                 .GetAll()
                 .Where(x => x.StartsOn > DateTime.Now)
                 .OrderBy(x => x.StartsOn)
-                .Select(x => new CourseTileViewModel()
-                {
-                    Title = x.Title,
-                    Description = x.Description,
-                    StartsOn = x.StartsOn,
-                    CourseId = x.Id
-                })
-                .Take(3)
+                .ProjectTo<CourseTileViewModel>()
+                //.Select(x => new CourseTileViewModel()
+                //{
+                //    Title = x.Title,
+                //    Description = x.Description,
+                //    StartsOn = x.StartsOn,
+                //    CourseId = x.Id
+                //})
+                .Take(upcomingCoursesCount)
                 .ToList();
 
             var viewModel = new HomeViewModel()
