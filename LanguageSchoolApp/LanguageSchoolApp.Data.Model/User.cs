@@ -23,7 +23,7 @@ namespace LanguageSchoolApp.Data.Model
 
         [Index]
         public bool IsDeleted { get; set; }
-
+        
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
 

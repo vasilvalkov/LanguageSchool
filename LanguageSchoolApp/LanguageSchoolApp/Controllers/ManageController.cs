@@ -8,12 +8,14 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LanguageSchoolApp.Models;
 using LanguageSchoolApp.Models.Manage;
+using LanguageSchoolApp.Services.Contracts;
 
 namespace LanguageSchoolApp.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly IUserService userService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -21,10 +23,11 @@ namespace LanguageSchoolApp.Controllers
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,IUserService userService)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            this.userService = userService;
+            this.UserManager = userManager;
+            this.SignInManager = signInManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -67,12 +70,14 @@ namespace LanguageSchoolApp.Controllers
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
+
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
             return View(model);
         }
 

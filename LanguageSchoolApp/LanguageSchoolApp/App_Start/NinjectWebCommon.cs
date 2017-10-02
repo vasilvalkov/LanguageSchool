@@ -79,7 +79,9 @@ namespace LanguageSchoolApp.App_Start
             kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext), typeof(IMsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind(typeof(ICourseService)).To(typeof(CourseService));
+            kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ISaveContext>().To<SaveContext>();
+            kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance).InSingletonScope();
         }        
     }
 }
