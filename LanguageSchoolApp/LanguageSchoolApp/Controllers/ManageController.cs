@@ -6,9 +6,13 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LanguageSchoolApp.Models;
+using AutoMapper.QueryableExtensions;
+
+using LanguageSchoolApp.Data.Model;
 using LanguageSchoolApp.Models.Manage;
 using LanguageSchoolApp.Services.Contracts;
+using LanguageSchoolApp.Models.Courses;
+using System.Collections.Generic;
 
 namespace LanguageSchoolApp.Controllers
 {
@@ -19,13 +23,14 @@ namespace LanguageSchoolApp.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
-        {
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,IUserService userService)
+        public ManageController(IUserService userService)
         {
             this.userService = userService;
+        }
+
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService)
+            : this(userService)
+        {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
         }
@@ -67,15 +72,22 @@ namespace LanguageSchoolApp.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var userId = this.User.Identity.GetUserId();
+            var userName = this.User.Identity.GetUserName();
+
+            var courses = this.userService
+                    .GetCourses(userName)
+                    .ProjectTo<UserCoursesViewModel>()
+                    .ToList();
+
             var model = new IndexViewModel
             {
-
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                Courses = courses,
+                HasPassword = this.HasPassword(),
+                PhoneNumber = await this.UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await this.UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await this.UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await this.AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
 
             return View(model);
