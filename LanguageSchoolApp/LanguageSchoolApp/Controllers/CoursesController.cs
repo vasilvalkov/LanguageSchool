@@ -1,4 +1,5 @@
-﻿using LanguageSchoolApp.Models.Courses;
+﻿using AutoMapper.QueryableExtensions;
+using LanguageSchoolApp.Models.Courses;
 using LanguageSchoolApp.Services.Contracts;
 using System;
 using System.Linq;
@@ -21,15 +22,7 @@ namespace LanguageSchoolApp.Controllers
             var allCourses = this.courseService
                 .GetAll()
                 .OrderBy(x => x.StartsOn)
-                .Select(x => new CourseViewModel()
-                {
-                    Title = x.Title,
-                    Description = x.Description,
-                    StartsOn = x.StartsOn,
-                    EndsOn = x.EndsOn,
-                    EnrolledStudentsCount = x.Students.Count(),
-                    CourseId = x.Id
-                })
+                .ProjectTo<CourseViewModel>()
                 .ToList();
 
             var viewModel = new CourseListViewModel()
@@ -46,15 +39,7 @@ namespace LanguageSchoolApp.Controllers
             var viewModel = this.courseService
                 .GetAll()
                 .Where(c => c.Id == id)
-                .Select(x => new CourseViewModel()
-                {
-                    Title = x.Title,
-                    Description = x.Description,
-                    StartsOn = x.StartsOn,
-                    EndsOn = x.EndsOn,
-                    EnrolledStudentsCount = x.Students.Count(),
-                    CourseId = x.Id
-                })
+                .ProjectTo<CourseViewModel>()
                 .FirstOrDefault();
 
             return View("CourseInfo", viewModel);

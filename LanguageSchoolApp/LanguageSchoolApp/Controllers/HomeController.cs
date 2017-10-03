@@ -31,13 +31,6 @@ namespace LanguageSchoolApp.Controllers
                 .Where(x => x.StartsOn > DateTime.Now)
                 .OrderBy(x => x.StartsOn)
                 .ProjectTo<CourseTileViewModel>()
-                //.Select(x => new CourseTileViewModel()
-                //{
-                //    Title = x.Title,
-                //    Description = x.Description,
-                //    StartsOn = x.StartsOn,
-                //    CourseId = x.Id
-                //})
                 .Take(upcomingCoursesCount)
                 .ToList();
 

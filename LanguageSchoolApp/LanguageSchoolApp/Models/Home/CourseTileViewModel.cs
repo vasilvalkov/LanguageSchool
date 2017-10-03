@@ -20,9 +20,6 @@ namespace LanguageSchoolApp.Models.Home
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Course, CourseTileViewModel>()
-                .ForMember(vm => vm.Title, cfg => cfg.MapFrom(course => course.Title))
-                .ForMember(vm => vm.Description, cfg => cfg.MapFrom(course => course.Description))
-                .ForMember(vm => vm.StartsOn, cfg => cfg.MapFrom(course => course.StartsOn))
                 .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id));
         }
     }

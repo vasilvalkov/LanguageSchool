@@ -1,5 +1,4 @@
-﻿using LanguageSchoolApp.Models.Courses;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 
 namespace LanguageSchoolApp.Models.Manage

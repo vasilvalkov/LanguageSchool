@@ -25,7 +25,8 @@ namespace LanguageSchoolApp.Models.Courses
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Course, CourseViewModel>()
-                .ForMember(vm => vm.EnrolledStudentsCount, cfg => cfg.MapFrom(course => course.Students.Count));
+                .ForMember(vm => vm.EnrolledStudentsCount, cfg => cfg.MapFrom(course => course.Students.Count))
+                .ForMember(vm => vm.CourseId, cfg => cfg.MapFrom(course => course.Id));
         }
     }
 }

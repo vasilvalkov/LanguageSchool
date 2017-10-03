@@ -1,9 +1,11 @@
-﻿using System;
+﻿using LanguageSchoolApp.Data.Model;
+using LanguageSchoolApp.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace LanguageSchoolApp.Models.Manage
 {
-    public class UserCoursesViewModel
+    public class UserCoursesViewModel : IMapFrom<Course>
     {
         public string Title { get; set; }
 
