@@ -44,12 +44,14 @@ namespace LanguageSchoolApp.Services
                 .Where(u => u.UserName == username);
         }
 
-        public IQueryable<ICollection<Course>> GetCourses(string username)
+        public IQueryable<Course> GetCourses(string username)
         {
             return this.userRepo
                 .AllNotDeleted
                 .Where(u => u.UserName == username)
-                .Select(u => u.Courses);
+                .Select(u => u.Courses)
+                .FirstOrDefault()
+                .AsQueryable();
         }
     }
 }

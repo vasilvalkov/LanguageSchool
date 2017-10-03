@@ -8,7 +8,7 @@ namespace LanguageSchoolApp.Services.Contracts
     {
         IQueryable<User> ByUsername(string username);
 
-        IQueryable<ICollection<Course>> GetCourses(string username);
+        IQueryable<Course> GetCourses(string username);
 
         string UserIdByUsername(string username);
     }
