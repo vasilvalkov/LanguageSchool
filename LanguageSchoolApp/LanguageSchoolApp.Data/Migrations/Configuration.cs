@@ -52,9 +52,11 @@ namespace LanguageSchoolApp.Data.Migrations
                     "Eius latine singulis cu est, discere tacimates an sed. Tempor altera ex est. Te nisl nusquam eum, magna euismod usu an, labores civibus sententiae his ex. Eu pri debet offendit, quas porro definitiones ea vis, vel ut volutpat salutandi. Id nihil scribentur mel, et mel altera mucius omittantur, consul vituperatoribus ex eum. Sea at amet fabellas, sea ne labore sadipscing. Ea nominavi interesset vis, affert iisque veritus qui ex. Eros oratio tincidunt ne vix, ut duo quando corrumpit forensibus. Vix odio hinc delicata ei. Iisque delenit phaedrum ex qui, ex nam commodo senserit."
                 };
 
-                for (int i = 1; i < 6; i++)
+                for (int i = 1; i <= courseTitles.Length; i++)
                 {
-                    var date = new DateTime(2017, 7 + i, 10 + i * 2);
+                    var date = DateTime.Now.AddMonths(rnd.Next(0, 8));
+                    date.AddDays(rnd.Next(1, 30));
+
                     var course = new Course()
                     {
                         Title = courseTitles[i - 1],
