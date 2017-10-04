@@ -53,5 +53,17 @@ namespace LanguageSchoolApp.Services
                 .FirstOrDefault()
                 .AsQueryable();
         }
+
+        public void EnrollInCourse(string username, Course course)
+        {
+            this.userRepo
+                .AllNotDeleted
+                .Where(u => u.UserName == username)
+                .FirstOrDefault()
+                .Courses
+                .Add(course);
+
+            this.context.Commit();
+        }
     }
 }

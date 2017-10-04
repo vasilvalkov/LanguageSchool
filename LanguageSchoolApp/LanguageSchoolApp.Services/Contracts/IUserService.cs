@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using LanguageSchoolApp.Data.Model;
 
 namespace LanguageSchoolApp.Services.Contracts
@@ -11,5 +10,7 @@ namespace LanguageSchoolApp.Services.Contracts
         IQueryable<Course> GetCourses(string username);
 
         string UserIdByUsername(string username);
+
+        void EnrollInCourse(string username, Course course);
     }
 }
