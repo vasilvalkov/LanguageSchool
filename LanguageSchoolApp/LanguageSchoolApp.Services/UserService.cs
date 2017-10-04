@@ -46,9 +46,7 @@ namespace LanguageSchoolApp.Services
 
         public IQueryable<Course> GetCourses(string username)
         {
-            return this.userRepo
-                .AllNotDeleted
-                .Where(u => u.UserName == username)
+            return this.ByUsername(username)
                 .Select(u => u.Courses)
                 .FirstOrDefault()
                 .AsQueryable();
@@ -56,9 +54,7 @@ namespace LanguageSchoolApp.Services
 
         public void EnrollInCourse(string username, Course course)
         {
-            this.userRepo
-                .AllNotDeleted
-                .Where(u => u.UserName == username)
+            this.ByUsername(username)
                 .FirstOrDefault()
                 .Courses
                 .Add(course);
