@@ -21,18 +21,7 @@
         }
         else
         {
-            @*@Ajax.ActionLink(
-               "Enroll",
-               "EnrollStudentInCourse",
-               "Courses",
-               new { courseId = Model.CourseId },
-               new AjaxOptions()
-               {
-                   HttpMethod = "POST"
-               },
-               new { @class = "btn btn-primary btn-block" })*@
             @Html.ActionLink("Enroll", "EnrollStudentInCourse", "Courses", new { id = Model.CourseId }, new { @class = "btn btn-primary btn-block" })
-            @*<a class="btn btn-primary btn-block" href="/courses/enrollstudentincourse/@Model.CourseId">Enroll</a>*@
         }
     </div>
 </section>
