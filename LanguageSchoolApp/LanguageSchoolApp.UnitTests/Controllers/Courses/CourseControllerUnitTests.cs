@@ -25,9 +25,9 @@ namespace LanguageSchoolApp.UnitTests.Controllers.Courses
                 cfg.CreateMap<CourseViewModel, Course>();
             });
             var courseServiceStub = new Mock<ICourseService>();
-            var mapperStub = new Mock<IMapper>();
+            var userServiceStub = new Mock<IUserService>();
 
-            CoursesController controller = new CoursesController(courseServiceStub.Object);
+            CoursesController controller = new CoursesController(courseServiceStub.Object, userServiceStub.Object);
 
             // Act
             ViewResult result = controller.AllCourses() as ViewResult;
@@ -52,14 +52,9 @@ namespace LanguageSchoolApp.UnitTests.Controllers.Courses
             var courseServiceStub = new Mock<ICourseService>();
             courseServiceStub.Setup(cs => cs.GetAll()).Returns(listOfCourses.AsQueryable());
 
-            var mapperStub = new Mock<IMapper>();
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Course, CourseViewModel>();
-                cfg.CreateMap<CourseViewModel, Course>();
-            });
-
-            CoursesController controller = new CoursesController(courseServiceStub.Object);
+            var userServiceStub = new Mock<IUserService>();
+            
+            CoursesController controller = new CoursesController(courseServiceStub.Object, userServiceStub.Object);
 
             // Act
             ViewResult result = controller.AllCourses() as ViewResult;
