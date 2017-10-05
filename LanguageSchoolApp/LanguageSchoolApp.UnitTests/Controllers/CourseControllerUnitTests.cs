@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Collections;
 
-namespace LanguageSchoolApp.UnitTests.Controllers.Courses
+namespace LanguageSchoolApp.UnitTests.Controllers
 {
     [TestFixture]
     public class CourseControllerUnitTests
