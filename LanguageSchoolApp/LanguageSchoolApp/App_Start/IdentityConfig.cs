@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using LanguageSchoolApp.Models;
 using LanguageSchoolApp.Data.Model;
 using LanguageSchoolApp.Data;
+using LanguageSchoolApp.Services.Contracts;
 
 namespace LanguageSchoolApp
 {
@@ -35,7 +36,7 @@ namespace LanguageSchoolApp
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserManager : UserManager<User>
+    public class ApplicationUserManager : UserManager<User>, IUserManagementService
     {
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
@@ -91,7 +92,7 @@ namespace LanguageSchoolApp
     }
 
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<User, string>
+    public class ApplicationSignInManager : SignInManager<User, string>, ISignInService
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)

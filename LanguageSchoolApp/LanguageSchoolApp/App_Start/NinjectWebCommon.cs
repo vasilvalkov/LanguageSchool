@@ -18,6 +18,9 @@ namespace LanguageSchoolApp.App_Start
     using Services;
     using Data.SaveContext;
     using AutoMapper;
+    using Microsoft.AspNet.Identity;
+    using Data.Model;
+    using Microsoft.AspNet.Identity.Owin;
 
     public static class NinjectWebCommon 
     {
@@ -82,6 +85,8 @@ namespace LanguageSchoolApp.App_Start
             kernel.Bind(typeof(IUserService)).To(typeof(UserService));
             kernel.Bind<ISaveContext>().To<SaveContext>();
             kernel.Bind<IMapper>().ToMethod(x => Mapper.Instance).InSingletonScope();
+            kernel.Bind<IUserManagementService>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+            kernel.Bind<ISignInService>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
         }        
     }
 }

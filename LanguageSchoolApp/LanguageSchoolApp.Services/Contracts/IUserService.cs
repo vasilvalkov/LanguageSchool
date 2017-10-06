@@ -1,5 +1,9 @@
 ﻿using System.Linq;
 using LanguageSchoolApp.Data.Model;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
 
 namespace LanguageSchoolApp.Services.Contracts
 {

@@ -2,9 +2,7 @@
 using LanguageSchoolApp.Data.Repositories;
 using LanguageSchoolApp.Data.SaveContext;
 using LanguageSchoolApp.Services.Contracts;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LanguageSchoolApp.Services
 {
