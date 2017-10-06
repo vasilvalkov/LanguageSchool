@@ -89,6 +89,11 @@ namespace LanguageSchoolApp
             }
             return manager;
         }
+
+        public User FindById(string userId)
+        {
+            return UserManagerExtensions.FindById(this, userId);
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.

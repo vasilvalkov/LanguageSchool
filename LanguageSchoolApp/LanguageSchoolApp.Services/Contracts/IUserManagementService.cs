@@ -47,5 +47,7 @@ namespace LanguageSchoolApp.Services.Contracts
         Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
 
         Task<IdentityResult> AddPasswordAsync(string userId, string password);
+
+        User FindById(string userId);
     }
 }
