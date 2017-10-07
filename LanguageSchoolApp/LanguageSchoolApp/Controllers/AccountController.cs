@@ -4,6 +4,7 @@ using LanguageSchoolApp.Services.Contracts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -23,6 +24,16 @@ namespace LanguageSchoolApp.Controllers
 
         public AccountController(IUserManagementService userManagementService, ISignInService signInService)
         {
+            if (userManagementService == null)
+            {
+                throw new ArgumentNullException("userManagementService");
+            }
+
+            if (signInService == null)
+            {
+                throw new ArgumentNullException("signInService");
+            }
+
             this.userManagementService = userManagementService;
             this.signInService = signInService;
         }

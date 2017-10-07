@@ -124,6 +124,7 @@
     <Compile Include="Data\MsSqlDbContextUnitTests.cs" />
     <Compile Include="Data\Repositories\EfRepositoryUnitTests.cs" />
     <Compile Include="Data\SaveContextUnitTests.cs" />
+    <Compile Include="Fakes\CoursesControllerFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerUnitTests.cs" />
     <Compile Include="Services\CourseServiceUnitTests.cs" />

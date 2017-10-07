@@ -1,18 +1,13 @@
-﻿using System;
+﻿using AutoMapper.QueryableExtensions;
+using LanguageSchoolApp.Models.Manage;
+using LanguageSchoolApp.Services.Contracts;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using AutoMapper.QueryableExtensions;
-
-using LanguageSchoolApp.Data.Model;
-using LanguageSchoolApp.Models.Manage;
-using LanguageSchoolApp.Services.Contracts;
-using LanguageSchoolApp.Models.Courses;
-using System.Collections.Generic;
 
 namespace LanguageSchoolApp.Controllers
 {
@@ -25,40 +20,31 @@ namespace LanguageSchoolApp.Controllers
 
         public ManageController(IUserService userService)
         {
+            if (userService == null)
+            {
+                throw new ArgumentNullException("userService");
+            }
+
             this.userService = userService;
         }
 
         public ManageController(IUserManagementService userManagementService, ISignInService signInService, IUserService userService)
             : this(userService)
         {
+            if (userManagementService == null)
+            {
+                throw new ArgumentNullException("userManagementService");
+            }
+
+            if (signInService == null)
+            {
+                throw new ArgumentNullException("signInService");
+            }
+
             this.userManagementService = userManagementService;
             this.signInService = signInService;
         }
-
-        //public ApplicationSignInManager signInService
-        //{
-        //    get
-        //    {
-        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        //    }
-        //    private set 
-        //    { 
-        //        _signInManager = value; 
-        //    }
-        //}
-
-        //public ApplicationUserManager userManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
-
+        
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)

@@ -4,6 +4,7 @@ using LanguageSchoolApp.Services.Contracts;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace LanguageSchoolApp.Controllers
 {
@@ -14,6 +15,16 @@ namespace LanguageSchoolApp.Controllers
 
         public CoursesController(ICourseService courseService, IUserService userService)
         {
+            if (courseService == null)
+            {
+                throw new ArgumentNullException("courseService");
+            }
+
+            if (userService == null)
+            {
+                throw new ArgumentNullException("userService");
+            }
+
             this.courseService = courseService;
             this.userService = userService;
         }
@@ -38,35 +49,59 @@ namespace LanguageSchoolApp.Controllers
         [HttpGet]
         public ActionResult ById(Guid id)
         {
-            var course = this.courseService
-                .GetAll()
-                .Where(c => c.Id == id)
-                .FirstOrDefault();
+            CourseByIdViewModel viewModel = null;
 
-            bool isUserEnrolledInCourse = this.userService
-                .GetCourses(this.User.Identity.Name)
-                .Contains(course);
+            if (id == default(Guid))
+            {
+                viewModel = new CourseByIdViewModel();
+            }
+            else
+            {
+                var course = this.courseService
+                                .GetAll()
+                                .Where(c => c.Id == id)
+                                .FirstOrDefault();
 
-            var viewModel = this.courseService
-                .GetAll()
-                .Where(c => c.Id == id)
-                .Select(x => new CourseByIdViewModel
+                bool isUserEnrolledInCourse = false;
+
+                if (this.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    Title = x.Title,
-                    Description = x.Description,
-                    StartsOn = x.StartsOn,
-                    EndsOn = x.EndsOn,
-                    EnrolledStudentsCount = x.Students.Count(),
-                    IsCurrentUserEnrolled = isUserEnrolledInCourse,
-                    CourseId = x.Id
-                })
-                .FirstOrDefault();
+                    isUserEnrolledInCourse = this.userService
+                        .GetCourses(this.User.Identity.Name)
+                        .Contains(course);
+                }
+
+                viewModel = this.courseService
+                    .GetAll()
+                    .Where(c => c.Id == id)
+                    .Select(x => new CourseByIdViewModel
+                    {
+                        Title = x.Title,
+                        Description = x.Description,
+                        StartsOn = x.StartsOn,
+                        EndsOn = x.EndsOn,
+                        EnrolledStudentsCount = x.Students.Count(),
+                        IsCurrentUserEnrolled = isUserEnrolledInCourse,
+                        CourseId = x.Id
+                    })
+                    .FirstOrDefault();
+            }
 
             return View("CourseInfo", viewModel);
         }
-        
+
         public ActionResult EnrollStudentInCourse(Guid id)
         {
+            if (!this.HttpContext.User.Identity.IsAuthenticated)
+            {
+                string returnUrl = string.Format("/courses/{0}", id);
+
+                return this.RedirectToAction(
+                    "Login", 
+                    "Account", 
+                    new RouteValueDictionary(new { returnUrl = returnUrl }) );
+            }
+
             var courseToEnroll = this.courseService
                 .GetAll()
                 .Where(c => c.Id == id)

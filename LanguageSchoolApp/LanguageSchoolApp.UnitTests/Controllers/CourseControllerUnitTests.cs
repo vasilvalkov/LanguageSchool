@@ -3,19 +3,39 @@ using LanguageSchoolApp.Controllers;
 using LanguageSchoolApp.Data.Model;
 using LanguageSchoolApp.Models.Courses;
 using LanguageSchoolApp.Services.Contracts;
+using LanguageSchoolApp.UnitTests.Fakes;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using System.Collections;
 
 namespace LanguageSchoolApp.UnitTests.Controllers
 {
     [TestFixture]
     public class CourseControllerUnitTests
     {
+        [Test]
+        public void Controller_ShouldThrowArgumentNullException_WhenPassedCourseServiceIsNull()
+        {
+            // Arrange
+            var userServiceStub = new Mock<IUserService>();
+            
+            // Act and Assert
+            Assert.Throws<ArgumentNullException>(() => new CoursesController(null, userServiceStub.Object));
+        }
+
+        [Test]
+        public void Controller_ShouldThrowArgumentNullException_WhenPassedUserServiceIsNull()
+        {
+            // Arrange
+            var courseServiceStub = new Mock<ICourseService>();
+
+            // Act and Assert
+            Assert.Throws<ArgumentNullException>(() => new CoursesController(courseServiceStub.Object, null));
+        }
+
         [Test]
         public void AllCourses_ShouldReturnNonNullResult()
         {
@@ -286,6 +306,7 @@ namespace LanguageSchoolApp.UnitTests.Controllers
 
             var controllerContextStub = new Mock<ControllerContext>();
             controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.Name).Returns("Username");
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(true);
             controllerContextStub.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
 
             CoursesController controller = new CoursesController(courseServiceMock.Object, userServiceMock.Object);
@@ -381,7 +402,29 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         }
 
         [Test]
-        public void EnrollStudentInCourse_ShouldSearchAvailableCourses_Once()
+        public void ById_ShouldPassEmptyViewModelToView_WhenPassedIdParameterIsEmptyGuuid()
+        {
+            // Arrange
+            Guid emptyGuid = Guid.Empty;            
+            var courseServiceStub = new Mock<ICourseService>();
+            var userServiceStub = new Mock<IUserService>();
+            
+            CoursesController controller = new CoursesController(courseServiceStub.Object, userServiceStub.Object);
+
+            // Act
+            ViewResult result = controller.ById(emptyGuid) as ViewResult;
+
+            // Assert
+            Assert.AreEqual(default(Guid), ((CourseByIdViewModel)result.Model).CourseId);
+            Assert.AreEqual(null, ((CourseByIdViewModel)result.Model).Title);
+            Assert.AreEqual(null, ((CourseByIdViewModel)result.Model).Description);
+            Assert.AreEqual(default(DateTime), ((CourseByIdViewModel)result.Model).StartsOn);
+            Assert.AreEqual(default(DateTime), ((CourseByIdViewModel)result.Model).EndsOn);
+            Assert.AreEqual(default(int), ((CourseByIdViewModel)result.Model).EnrolledStudentsCount);
+        }
+
+        [Test]
+        public void EnrollStudentInCourse_ShouldSearchAvailableCourses_WhenThereIsLoggedInUser()
         {
             // Arrange
             Mapper.Initialize(cfg =>
@@ -413,10 +456,11 @@ namespace LanguageSchoolApp.UnitTests.Controllers
 
             var controllerContextStub = new Mock<ControllerContext>();
             controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.Name).Returns("Username");
-            controllerContextStub.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(true);
 
             CoursesController controller = new CoursesController(courseServiceMock.Object, userServiceStub.Object);
             controller.ControllerContext = controllerContextStub.Object;
+
             // Act
             ViewResult result = controller.EnrollStudentInCourse(searchedCourseId) as ViewResult;
 
@@ -425,7 +469,7 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         }
 
         [Test]
-        public void EnrollStudentInCourse_ShouldCallUserServiceEnrollInCourse_Once()
+        public void EnrollStudentInCourse_ShouldCallUserServiceEnrollInCourse_WhenThereIsLoggedInUser()
         {
             // Arrange
             Mapper.Initialize(cfg =>
@@ -446,15 +490,64 @@ namespace LanguageSchoolApp.UnitTests.Controllers
 
             var controllerContextStub = new Mock<ControllerContext>();
             controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.Name).Returns("Username");
-            controllerContextStub.SetupGet(p => p.HttpContext.Request.IsAuthenticated).Returns(true);
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(true);
 
             CoursesController controller = new CoursesController(courseServiceStub.Object, userServiceMock.Object);
             controller.ControllerContext = controllerContextStub.Object;
+
             // Act
             ViewResult result = controller.EnrollStudentInCourse(searchedCourseId) as ViewResult;
 
             // Assert
             userServiceMock.Verify(us => us.EnrollInCourse(It.IsAny<string>(), courseToEnroll), Times.Once);
+        }
+
+        [Test]
+        public void EnrollStudentInCourse_ShouldRedirectToLoginAction_WhenThereIsNotLoggedInUser()
+        {
+            // Arrange
+            Guid searchedCourseId = Guid.NewGuid();
+
+            var courseServiceMock = new Mock<ICourseService>();
+
+            var userServiceStub = new Mock<IUserService>();
+
+            var controllerContextStub = new Mock<ControllerContext>();
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.Name).Returns("Username");
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(false);
+
+            CoursesControllerFake controller = new CoursesControllerFake(courseServiceMock.Object, userServiceStub.Object);
+            controller.ControllerContext = controllerContextStub.Object;
+
+            // Act
+            var result = controller.EnrollStudentInCourse(searchedCourseId) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("/Account/Login", result.RouteName);
+        }
+
+        [Test]
+        public void EnrollStudentInCourse_ShouldSaveReturnUrl_WhenTRedirectingToLoginView()
+        {
+            // Arrange
+            Guid searchedCourseId = Guid.NewGuid();
+
+            var courseServiceMock = new Mock<ICourseService>();
+
+            var userServiceStub = new Mock<IUserService>();
+
+            var controllerContextStub = new Mock<ControllerContext>();
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.Name).Returns("Username");
+            controllerContextStub.SetupGet(p => p.HttpContext.User.Identity.IsAuthenticated).Returns(false);
+
+            CoursesControllerFake controller = new CoursesControllerFake(courseServiceMock.Object, userServiceStub.Object);
+            controller.ControllerContext = controllerContextStub.Object;
+            string expected = string.Format("/courses/{0}", searchedCourseId);
+            // Act
+            var result = controller.EnrollStudentInCourse(searchedCourseId) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(expected, result.RouteValues["returnUrl"]);
         }
     }
 }
