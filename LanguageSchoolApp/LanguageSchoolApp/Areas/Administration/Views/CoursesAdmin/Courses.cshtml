@@ -1,0 +1,75 @@
+﻿@using LanguageSchoolApp.Areas.Administration.Models.Courses
+@model CoursesAdminViewModel
+
+@*@Styles.Render("~/Content/datatables")
+@Scripts.Render("~/bundles/datatables")*@
+<h1>Courses administration</h1>
+<hr />
+<div class="table-responsive">
+    <table id="coursesTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Starts On</th>
+                <th>Ends On</th>
+                <th>Id</th>
+                <th>IsDeleted</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var course in Model.Courses)
+            {
+                <tr>
+                    <td>@course.Title</td>
+                    <td>@course.Description</td>
+                    <td>@Html.DisplayFor(x => course.StartsOn)</td>
+                    <td>@Html.DisplayFor(x => course.EndsOn)</td>
+                    <td>@course.Id</td>
+                    <td>@Html.CheckBoxFor(x => course.IsDeleted)</td>
+
+                    @*@{
+                        string adLink = $"/device/{deviceType}/{computer.Id}";
+                        string editLink = $"/device/update{deviceType}/{computer.Id}";
+                    }*@
+
+                    <td>
+                        <a class="btn btn-default" target="_blank" href="#">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary" target="_blank" href="#">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+
+
+                    <td>
+                        @*@Ajax.ActionLink("X", "Index", "AdminPanel",
+                                        new { type = deviceType, id = computer.Id },
+                                        new AjaxOptions { HttpMethod = "POST" },
+                                        new { @class = "btn btn-danger" })*@
+                </tr>
+                        }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#coursesTable').DataTable();
+        });
+        $(".btn-danger").on('click', (event) => {
+            let el = $(event.target);
+            el.parent().parent().remove();
+        });
+
+        $('#refreshButton').on('click', () => {
+            let url = '/administration/adminpanel/computers';
+            content.load(url);
+        })
+    </script>
+}
