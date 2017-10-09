@@ -8,6 +8,8 @@ namespace LanguageSchoolApp.Services.Contracts
 {
     public interface IUserManagementService : IDisposable
     {
+        Task<IdentityResult> AddToRoleAsync(string userId, string role);
+
         IIdentityMessageService SmsService { get; set; }
 
         Task<IdentityResult> CreateAsync(User user, string password);
