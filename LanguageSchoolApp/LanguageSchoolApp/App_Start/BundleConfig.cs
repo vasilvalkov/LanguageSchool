@@ -28,6 +28,12 @@ namespace LanguageSchoolApp
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                       "~/Scripts/DataTables/jquery.dataTables.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                    "~/Content/DataTables/css/jquery.dataTables.css"));
+
             BundleTable.EnableOptimizations = true;
         }
     }
