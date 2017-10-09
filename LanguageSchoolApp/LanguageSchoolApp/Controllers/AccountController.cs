@@ -137,8 +137,9 @@ namespace LanguageSchoolApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
-                var result = await userManagementService.CreateAsync(user, model.Password);
+                var user = new User { UserName = model.Email, Email = model.Email, CreatedOn = DateTime.UtcNow };
+                var result = await this.userManagementService.CreateAsync(user, model.Password);
+                await this.userManagementService.AddToRoleAsync(user.Id, "Student");
                 if (result.Succeeded)
                 {
                     await this.signInService.SignInAsync(user, isPersistent:false, rememberBrowser:false);
