@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Linguana</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/datatables")
     @Styles.Render("~/Content/home.css")
 
 </head>
@@ -26,7 +27,10 @@
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllCourses" ? "active" : "")">@Html.ActionLink("Courses", "AllCourses", "Courses")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "about" ? "active" : "")">@Html.ActionLink("About", "About", "Home")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Admin panel", "Index", "Administration/Admin")</li>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Admin panel", "Index", "Administration/Admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -42,6 +46,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/datatables")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
