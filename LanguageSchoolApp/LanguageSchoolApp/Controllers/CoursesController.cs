@@ -30,6 +30,7 @@ namespace LanguageSchoolApp.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 120)]
         public ActionResult AllCourses()
         {
             var allCourses = this.courseService
