@@ -1,8 +1,8 @@
 ﻿@using LanguageSchoolApp.Areas.Administration.Models.Courses
 @model CoursesAdminViewModel
 
-@*@Styles.Render("~/Content/datatables")
-@Scripts.Render("~/bundles/datatables")*@
+@Styles.Render("~/Content/datatables")
+@Scripts.Render("~/bundles/datatables")
 <h1>Courses administration</h1>
 <hr />
 <div class="table-responsive">
@@ -34,7 +34,7 @@
                         string editLink = $"/device/update{deviceType}/{computer.Id}";
                     }*@
 
-                    <td>
+                    @*<td>
                         <a class="btn btn-default" target="_blank" href="#">
                             <span class="glyphicon glyphicon-search"></span>
                         </a>
@@ -44,7 +44,7 @@
                         <a class="btn btn-primary" target="_blank" href="#">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                    </td>
+                    </td>*@
 
 
                     <td>

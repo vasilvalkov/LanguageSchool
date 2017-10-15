@@ -203,7 +203,10 @@
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig\ApplicationSignInManager.cs" />
+    <Compile Include="App_Start\IdentityConfig\ApplicationUserManager.cs" />
+    <Compile Include="App_Start\IdentityConfig\EmailService.cs" />
+    <Compile Include="App_Start\IdentityConfig\SmsService.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -511,6 +514,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Admin\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Linguana.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

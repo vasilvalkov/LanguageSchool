@@ -31,7 +31,7 @@ namespace LanguageSchoolApp
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                        "~/Scripts/DataTables/jquery.dataTables.js"));
 
-            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+            bundles.Add(new StyleBundle("~/Content/jqdatatables").Include(
                     "~/Content/DataTables/css/jquery.dataTables.css"));
 
             BundleTable.EnableOptimizations = true;
