@@ -17,7 +17,7 @@ namespace LanguageSchoolApp.UnitTests.Controllers
     public class CourseControllerUnitTests
     {
         [Test]
-        public void Controller_ShouldThrowArgumentNullException_WhenPassedCourseServiceIsNull()
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedCourseServiceIsNull()
         {
             // Arrange
             var userServiceStub = new Mock<IUserService>();
@@ -27,7 +27,7 @@ namespace LanguageSchoolApp.UnitTests.Controllers
         }
 
         [Test]
-        public void Controller_ShouldThrowArgumentNullException_WhenPassedUserServiceIsNull()
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedUserServiceIsNull()
         {
             // Arrange
             var courseServiceStub = new Mock<ICourseService>();
