@@ -118,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Administration\Controllers\AdminControllerUnitTests.cs" />
     <Compile Include="Areas\Administration\Controllers\CoursesAdminControllerUnitTests.cs" />
     <Compile Include="Controllers\AccountControllerUnitTests.cs" />
     <Compile Include="Controllers\CourseControllerUnitTests.cs" />
