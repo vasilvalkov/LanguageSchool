@@ -1,0 +1,14 @@
+﻿@using LanguageSchoolApp.Areas.Administration.Models.Courses
+@model CourseEditViewModel
+
+<td>@Html.DisplayFor(x => Model.Title)</td>
+<td>@Html.DisplayFor(x => Model.Description)</td>
+<td>@Html.DisplayFor(x => Model.StartsOn)</td>
+<td>@Html.DisplayFor(x => Model.EndsOn)</td>
+<td>@Html.DisplayFor(x => Model.CourseId)</td>
+<td>@Html.CheckBoxFor(x => Model.IsDeleted)</td>
+<td>
+    <a class="btn btn-sm btn-primary btnEdit" id="@Model.CourseId">
+        <span class="glyphicon glyphicon-pencil"> Edit</span>
+    </a>
+</td>

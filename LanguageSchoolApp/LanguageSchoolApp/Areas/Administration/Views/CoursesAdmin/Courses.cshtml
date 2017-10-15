@@ -9,10 +9,11 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Starts On</th>
-                <th>Ends On</th>
+                <th class="nowrap">Starts On</th>
+                <th class="nowrap">Ends On</th>
                 <th>Id</th>
-                <th>IsDeleted</th>
+                <th>Is Deleted</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -20,42 +21,9 @@
             @foreach (var course in Model.Courses)
             {
                 <tr>
-                    <td>@Html.DisplayFor(x => course.Title)</td>
-                    <td>@Html.DisplayFor(x => course.Description)</td>
-                    <td>@Html.DisplayFor(x => course.StartsOn)</td>
-                    <td>@Html.DisplayFor(x => course.EndsOn)</td>
-                    <td>@Html.DisplayFor(x => course.Id)</td>
-                    <td>@Html.CheckBoxFor(x => course.IsDeleted)</td>
+                    @Html.Partial("_CourseRowReadPartial", course)
 
-                    @*<td>@Html.EditorFor(x => course.Title)</td>
-                    <td>@Html.TextAreaFor(x => course.Description)</td>
-                    <td>@Html.EditorFor(x => course.StartsOn)</td>
-                    <td>@Html.EditorFor(x => course.EndsOn)</td>
-                    <td>@Html.EditorFor(x => course.Id)</td>
-                    <td>@Html.CheckBoxFor(x => course.IsDeleted)</td>*@
-
-                    @*@{
-                            string adLink = $"/device/{deviceType}/{computer.Id}";
-                            string editLink = $"/device/update{deviceType}/{computer.Id}";
-                        }*@
-
-                    @*<td>
-                            <a class="btn btn-default" target="_blank" href="#">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a class="btn btn-primary" target="_blank" href="#">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                        </td>*@
-
-
-                        @*@Ajax.ActionLink("X", "Index", "AdminPanel",
-                            new { type = deviceType, id = computer.Id },
-                            new AjaxOptions { HttpMethod = "POST" },
-                            new { @class = "btn btn-danger" })*@
+                    @*@Html.Partial("_CourseRowEditPartial", viewModel)*@
                 </tr>
             }
         </tbody>
@@ -66,14 +34,13 @@
         $(document).ready(function () {
             $('#coursesTable').dataTable({ "paging": true });
         });
-        //$(".btn-danger").on('click', (event) => {
-        //    let el = $(event.target);
-        //    el.parent().parent().remove();
-        //});
 
-        //$('#refreshButton').on('click', () => {
-        //    let url = '/administration/adminpanel/computers';
-        //    content.load(url);
-        //})
+        $(".btnEdit").on("click", function () {
+
+            $.get('@Url.Action("GetEditorRow", "CoursesAdmin")', { id: $(this).prop("id") }, function (view) {
+                $(this).closest("tr").html(view);
+            });
+
+        });
     </script>
 }

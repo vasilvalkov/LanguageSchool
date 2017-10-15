@@ -6,5 +6,7 @@ namespace LanguageSchoolApp.Services.Contracts
     public interface ICourseService
     {
         IQueryable<Course> GetAll();
+
+        void Update(Course course);
     }
 }

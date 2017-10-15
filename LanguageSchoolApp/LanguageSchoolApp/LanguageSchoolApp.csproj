@@ -213,6 +213,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\CoursesAdminController.cs" />
+    <Compile Include="Areas\Administration\Models\Courses\CourseEditViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Courses\CoursesAdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -514,6 +515,8 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_CourseRowEditPartial.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_CourseRowReadPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Linguana.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

@@ -1,9 +1,9 @@
-﻿using LanguageSchoolApp.Areas.Administration.Models.Courses;
+﻿using AutoMapper.QueryableExtensions;
+using LanguageSchoolApp.Areas.Administration.Models.Courses;
+using LanguageSchoolApp.Data.Model;
 using LanguageSchoolApp.Services.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace LanguageSchoolApp.Areas.Administration.Controllers
@@ -33,7 +33,10 @@ namespace LanguageSchoolApp.Areas.Administration.Controllers
         // GET: Administration/Courses
         public ActionResult Courses()
         {
-            var courses = this.courseService.GetAll().ToList();
+            var courses = this.courseService
+                .GetAll()
+                .ProjectTo<CourseEditViewModel>()
+                .ToList();
 
             var viewModel = new CoursesAdminViewModel()
             {
@@ -53,6 +56,25 @@ namespace LanguageSchoolApp.Areas.Administration.Controllers
             }
 
             return null;
+        }
+
+        [HttpPost]
+        public void UpdateCourse(Course course)
+        {
+            if (this.Request.IsAjaxRequest())
+            {
+                this.courseService.Update(course);
+            }
+        }
+
+        public ActionResult GetEditorRow(Guid id)
+        {
+            var viewModel = this.courseService
+                .GetAll()
+                .ProjectTo<CourseEditViewModel>()
+                .FirstOrDefault(c => c.CourseId == id);
+
+            return PartialView("_CourseRowEditPartial", viewModel);
         }
     }
 }

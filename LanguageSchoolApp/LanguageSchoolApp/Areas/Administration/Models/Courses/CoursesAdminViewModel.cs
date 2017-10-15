@@ -5,6 +5,6 @@ namespace LanguageSchoolApp.Areas.Administration.Models.Courses
 {
     public class CoursesAdminViewModel
     {
-        public List<Course> Courses { get; set; }
+        public List<CourseEditViewModel> Courses { get; set; }
     }
 }
