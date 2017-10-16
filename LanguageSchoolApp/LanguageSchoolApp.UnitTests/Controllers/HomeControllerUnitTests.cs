@@ -98,5 +98,20 @@ namespace LanguageSchoolApp.UnitTests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [Test]
+        public void PageNotFound_ShouldReturnDefaultView()
+        {
+            // Arrange
+            var courseServiceStub = new Mock<ICourseService>();
+            var mapperStub = new Mock<IMapper>();
+            HomeController controller = new HomeController(courseServiceStub.Object, mapperStub.Object);
+
+            // Act
+            ViewResult result = controller.PageNotFound() as ViewResult;
+
+            // Assert
+            Assert.AreEqual(string.Empty, result.ViewName);
+        }
     }
 }

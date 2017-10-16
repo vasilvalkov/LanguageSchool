@@ -46,18 +46,6 @@ namespace LanguageSchoolApp.Areas.Administration.Controllers
             return this.View(viewModel);
         }
 
-
-        public JsonResult GetCourses()
-        {
-            if (this.Request.IsAjaxRequest())
-            {
-                var coursesJson = this.courseService.GetAll().ToList();
-                return Json(new { rows = coursesJson }, JsonRequestBehavior.AllowGet);
-            }
-
-            return null;
-        }
-
         [HttpPost]
         public void UpdateCourse(Course course)
         {

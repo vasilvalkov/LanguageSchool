@@ -39,21 +39,26 @@ namespace LanguageSchoolApp.Controllers
                 Courses = upcomingCourses
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return this.View();
+        }
+
+        public ActionResult PageNotFound()
+        {
+            return this.View();
         }
     }
 }

@@ -252,6 +252,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -573,6 +574,7 @@
     <Content Include="Views\Shared\_CourseTilePartial.cshtml" />
     <Content Include="Views\Courses\AllCourses.cshtml" />
     <Content Include="Views\Shared\_CourseDetailedTilePartial.cshtml" />
+    <Content Include="Views\Shared\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
