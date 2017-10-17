@@ -27,11 +27,6 @@ namespace LanguageSchoolApp
                 defaults: new { controller = "Courses", action = "ById", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "404-PageNotFound",
-                url: "{*url}",
-                defaults: new { controller = "Home", action = "PageNotFound" }
-            );
 
             routes.MapRoute(
                 name: "Default",
@@ -39,6 +34,11 @@ namespace LanguageSchoolApp
                 defaults: new { controller = "home", action = "index", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "404-PageNotFound",
+                url: "{*url}",
+                defaults: new { controller = "Home", action = "PageNotFound" }
+            );
         }
     }
 }
