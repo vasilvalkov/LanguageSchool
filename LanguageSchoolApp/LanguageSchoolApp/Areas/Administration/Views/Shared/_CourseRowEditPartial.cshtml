@@ -1,15 +1,23 @@
 ﻿@using LanguageSchoolApp.Areas.Administration.Models.Courses
 @model CourseEditViewModel
 
-@using (Ajax.BeginForm("UpdateCourse", "CoursesAdmin", new AjaxOptions { HttpMethod = "POST" }))
-{
-    <td>@Html.EditorFor(x => Model.Title)</td>
-    <td>@Html.TextAreaFor(x => Model.Description)</td>
-    <td>@Html.EditorFor(x => Model.StartsOn)</td>
-    <td>@Html.EditorFor(x => Model.EndsOn)</td>
-    <td>@Html.EditorFor(x => Model.CourseId)</td>
-    <td>@Html.CheckBoxFor(x => Model.IsDeleted)</td>
-    <td>
-        <input class="btn btn-sm btn-primary" type="submit" value="Save">
-    </td>
-}
+<td>@Html.EditorFor(x => Model.Title)</td>
+<td>@Html.TextAreaFor(x => Model.Description)</td>
+<td>@Html.EditorFor(x => Model.StartsOn)</td>
+<td>@Html.EditorFor(x => Model.EndsOn)</td>
+<td>@Html.CheckBoxFor(x => Model.IsDeleted)</td>
+<td>
+    @using (Ajax.BeginForm(
+                "UpdateCourse",
+                "CoursesAdmin",
+                new { course = Model },
+                new AjaxOptions { HttpMethod = "POST" },
+                null))
+    {
+        @Html.AntiForgeryToken()
+    
+        <button class="btn btn-sm btn-primary btnSave" type="submit" value="Save" id="@Model.CourseId">
+            <span class="glyphicon glyphicon-ok-circle"> Save</span>
+        </button>
+    }
+</td>

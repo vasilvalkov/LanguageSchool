@@ -11,7 +11,6 @@
                 <th>Description</th>
                 <th class="nowrap">Starts On</th>
                 <th class="nowrap">Ends On</th>
-                <th>Id</th>
                 <th>Is Deleted</th>
                 <th>Action</th>
             </tr>
@@ -22,8 +21,6 @@
             {
                 <tr>
                     @Html.Partial("_CourseRowReadPartial", course)
-
-                    @*@Html.Partial("_CourseRowEditPartial", viewModel)*@
                 </tr>
             }
         </tbody>
@@ -35,12 +32,16 @@
             $('#coursesTable').dataTable({ "paging": true });
         });
 
-        $(".btnEdit").on("click", function () {
-
+        $(".btnEdit").on("click", function (ev) {
             $.get('@Url.Action("GetEditorRow", "CoursesAdmin")', { id: $(this).prop("id") }, function (view) {
+                $(ev.target).closest("tr").html(view);
+            });
+        });
+        
+        function saveRecord () {
+            $.get('@Url.Action("GetDisplayRow", "CoursesAdmin")', { id: $(this).prop("id") }, function (view) {
                 $(this).closest("tr").html(view);
             });
-
-        });
+        }
     </script>
 }

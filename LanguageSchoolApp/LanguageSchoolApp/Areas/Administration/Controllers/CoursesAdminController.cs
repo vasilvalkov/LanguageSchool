@@ -33,9 +33,7 @@ namespace LanguageSchoolApp.Areas.Administration.Controllers
         // GET: Administration/Courses
         public ActionResult Courses()
         {
-            var courses = this.courseService
-                .GetAll()
-                .ProjectTo<CourseEditViewModel>()
+            var courses = this.GetCoursesFromDb()
                 .ToList();
 
             var viewModel = new CoursesAdminViewModel()
@@ -47,22 +45,52 @@ namespace LanguageSchoolApp.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public void UpdateCourse(Course course)
+        public void UpdateCourse(CourseEditViewModel course)
         {
+            Course editedCourse = new Course()
+            {
+                Title = course.Title,
+                Description = course.Description,
+                StartsOn = course.StartsOn,
+                EndsOn = course.EndsOn,
+                IsDeleted = course.IsDeleted,
+                Id = course.CourseId
+            };
+
             if (this.Request.IsAjaxRequest())
             {
-                this.courseService.Update(course);
+                this.courseService.Update(editedCourse);
             }
+
+            this.GetDisplayRow(course.CourseId);
         }
 
+        [HttpGet]
         public ActionResult GetEditorRow(Guid id)
         {
-            var viewModel = this.courseService
-                .GetAll()
-                .ProjectTo<CourseEditViewModel>()
+            var viewModel = this.GetCoursesFromDb()
                 .FirstOrDefault(c => c.CourseId == id);
 
-            return PartialView("_CourseRowEditPartial", viewModel);
+            return this.PartialView("_CourseRowEditPartial", viewModel);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult GetDisplayRow(Guid id)
+        {
+            var viewModel = this.GetCoursesFromDb()
+                .FirstOrDefault(c => c.CourseId == id);
+
+            return this.PartialView("_CourseRowReadPartial", viewModel);
+        }
+
+        private IQueryable<CourseEditViewModel> GetCoursesFromDb()
+        {
+            var coursesFromDb = this.courseService
+                .GetAll()
+                .ProjectTo<CourseEditViewModel>();
+
+            return coursesFromDb;
         }
     }
 }
