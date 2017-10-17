@@ -2,7 +2,6 @@
 using LanguageSchoolApp.Areas.Administration.Controllers;
 using LanguageSchoolApp.Areas.Administration.Models.Courses;
 using LanguageSchoolApp.Data.Model;
-using LanguageSchoolApp.Models.Courses;
 using LanguageSchoolApp.Services.Contracts;
 using Moq;
 using NUnit.Framework;
@@ -67,6 +66,97 @@ namespace LanguageSchoolApp.UnitTests.Areas.Administration.Controllers
 
             // Assert
             courseServiceMock.Verify(cs => cs.GetAll(), Times.Once);
-        }       
+        }
+
+        [Test]
+        public void UpdateCourse_ShouldCallUpdateOnCourseService()
+        {
+            // Arrange
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Course, CourseEditViewModel>();
+                cfg.CreateMap<CourseEditViewModel, Course>();
+            });
+
+            Guid validId = Guid.NewGuid();
+
+            var course = new CourseEditViewModel() { CourseId = validId };
+
+            var courseServiceStub = new Mock<ICourseService>();
+            courseServiceStub.Setup(cs => cs.Update(It.IsAny<Course>()));
+
+            var userServiceStub = new Mock<IUserService>();
+
+            var controller = new CoursesAdminController(courseServiceStub.Object, userServiceStub.Object);
+            controller.InjectContext(ajaxRequest: true);
+
+            // Act
+            controller.UpdateCourse(course);
+
+            // Assert
+            courseServiceStub.Verify(cs => cs.Update(It.IsAny<Course>()), Times.Once);
+        }
+
+        [Test]
+        public void GetEditorRow_ShouldReturnViewNamedCourseRowEditPartial()
+        {
+            // Arrange
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Course, CourseEditViewModel>();
+                cfg.CreateMap<CourseEditViewModel, Course>();
+            });
+
+            Guid validId = Guid.NewGuid();
+
+            var listOfCourses = new List<Course>()
+            {
+                new Course() { Id = validId }
+            };
+
+            var courseServiceStub = new Mock<ICourseService>();
+            courseServiceStub.Setup(cs => cs.GetAll()).Returns(listOfCourses.AsQueryable());
+
+            var userServiceStub = new Mock<IUserService>();
+
+            var controller = new CoursesAdminController(courseServiceStub.Object, userServiceStub.Object);
+
+            // Act
+            PartialViewResult result = controller.GetEditorRow(validId) as PartialViewResult;
+
+            // Assert
+            Assert.AreEqual("_CourseRowEditPartial", result.ViewName);
+        }
+
+        [Test]
+        public void GetDisplayRow_ShouldReturnViewNamedCourseRowEditPartial()
+        {
+            // Arrange
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Course, CourseEditViewModel>();
+                cfg.CreateMap<CourseEditViewModel, Course>();
+            });
+
+            Guid validId = Guid.NewGuid();
+
+            var listOfCourses = new List<Course>()
+            {
+                new Course() { Id = validId }
+            };
+
+            var courseServiceStub = new Mock<ICourseService>();
+            courseServiceStub.Setup(cs => cs.GetAll()).Returns(listOfCourses.AsQueryable());
+
+            var userServiceStub = new Mock<IUserService>();
+
+            var controller = new CoursesAdminController(courseServiceStub.Object, userServiceStub.Object);
+
+            // Act
+            PartialViewResult result = controller.GetDisplayRow(validId) as PartialViewResult;
+
+            // Assert
+            Assert.AreEqual("_CourseRowReadPartial", result.ViewName);
+        }
     }
 }
