@@ -18,3 +18,5 @@ Registered users can enroll in available courses and can see info about current 
 A registered user who is granted administrative rights has acces to the administration view which enables them to edit all the data in the system, e.g. to change course or user details, add or delete course or user and so on.
 
 :bulb: [**Project description**](./Project-description.md)
+
+:link: [**Project demo**](http://linguana.somee.com/)
